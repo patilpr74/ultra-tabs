@@ -1,0 +1,66 @@
+<div class="main-container">
+  <h1>Tab component test</h1>
+
+ <section class="tab-section">
+  <h2>Tab Using <span>(ngIf)</span></h2>
+
+  <div class="tab-header">
+    <button
+      *ngFor="let tab of tabs"
+      [class.active]="activeIf === tab"
+      (click)="activeIf = tab">
+      {{ tab }}
+    </button>
+  </div>
+
+  <div class="tab-body">
+    <p *ngIf="activeIf === 'HTML'">{{ tabContent['HTML'] }}</p>
+    <p *ngIf="activeIf === 'CSS'">{{ tabContent['CSS'] }}</p>
+    <p *ngIf="activeIf === 'JavaScript'">{{ tabContent['JavaScript'] }}</p>
+    <p *ngIf="activeIf === 'Angular'">{{ tabContent['Angular'] }}</p>
+  </div>
+</section>
+
+<!-- ------------------ ngFor Version ------------------ -->
+<section class="tab-section">
+  <h2>Tab Using <span>(ngFor)</span></h2>
+
+  <div class="tab-header">
+    <button
+      *ngFor="let tab of tabs"
+      [class.active]="activeFor === tab"
+      (click)="activeFor = tab">
+      {{ tab }}
+    </button>
+  </div>
+
+  <div class="tab-body">
+    <ng-container *ngFor="let tab of tabs">
+      <p *ngIf="activeFor === tab">{{ tabContent[tab] }}</p>
+    </ng-container>
+  </div>
+</section>
+
+<!-- ------------------ ngSwitch Version ------------------ -->
+<section class="tab-section">
+  <h2>Tab Using <span>(ngSwitch)</span></h2>
+
+  <div class="tab-header">
+    <button
+      *ngFor="let tab of tabs"
+      [class.active]="activeSwitch === tab"
+      (click)="activeSwitch = tab">
+      {{ tab }}
+    </button>
+  </div>
+
+  <div class="tab-body" [ngSwitch]="activeSwitch">
+    <p *ngSwitchCase="'HTML'">{{ tabContent['HTML'] }}</p>
+    <p *ngSwitchCase="'CSS'">{{ tabContent['CSS'] }}</p>
+    <p *ngSwitchCase="'JavaScript'">{{ tabContent['JavaScript'] }}</p>
+    <p *ngSwitchCase="'Angular'">{{ tabContent['Angular'] }}</p>
+    <p *ngSwitchDefault>Select a tab to see content</p>
+  </div>
+</section>
+
+</div>
